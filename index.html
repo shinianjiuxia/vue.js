@@ -8,21 +8,32 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="app1">
+    <div id="app1">{{}}
         <div>数据双向绑定 v-model </div>
-        <div>v-if 和 v-else</div>
-        <div>v-show</div>
-        <div>v-for  </div>
+        <div>v-if 和 v-else //删除、创建元素</div>
+        <div>v-show //隐藏、显示元素</div>
+        <div>v-for 
+                v-for="(item,index) in obj/arr"
+                如果是对象obj时item表示k值，index表示属性值
+                如果是数组时item表示数组里面每一个元素 index表示元素下标           
+        </div>
         <div>v-on  简写 @ </div>
-        <div>v-bind  简写 ：</div>
+        <div>v-bind  简写 ：//让标签的正常属性里面可以放变量 列如：v-bind：src="变量"
+              
+            <div>两个特殊的标签属性 style class</div>
+             style，class比较特殊的里面放的是对象
+        </div>
         
     </div>
 
-    <div id="app2"></div>
+    <div id="app2">
+        <div>事件修饰符 v-model  v-on @ </div>
+
+    </div>
 
     <script>
      //全局指令  Vue自身提供的都是全局指令
-    Vue.directive('lqq',{
+    Vue.directive('lqq',function(value){
         bind(el,obj){
 
         },
@@ -57,7 +68,7 @@
                     }
                 }
             },
-            filter:{       //该选项参数放 过滤器 局部过滤器   key值表示过滤器名称 
+            filters:{       //该选项参数放 过滤器 局部过滤器   key值表示过滤器名称 
                 'lp':function(value){
                     var newValue;
                     /*   */
