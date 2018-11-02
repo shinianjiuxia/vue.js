@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app1">
+        <div>数据双向绑定 v-model </div>
+        <div>v-if 和 v-else</div>
+        <div>v-show</div>
+        <div>v-for  </div>
+        <div>v-on  简写 @ </div>
+        <div>v-bind  简写 ：</div>
+        
+    </div>
+
+    <div id="app2"></div>
+
+    <script>
+     //全局指令  Vue自身提供的都是全局指令
+    Vue.directive('lqq',{
+        bind(el,obj){
+
+        },
+        update(el,obj){
+
+        }
+    });
+
+    //全局过滤器 
+    Vue.filter('pl',function(value){
+        return 0;
+    });
+
+        //vm1对应id为app1的模板
+        var vm1 = new Vue({   //选项参数
+            el:'#app1',       //挂载点：作用 ：找到页面上vm1这个实例要渲染的那个 模板
+            data:{     // 该选项参数放数据
+                msg:''
+            },
+            methods:{   //该选项参数 放函数
+                add(){
+
+                }
+            },
+            directives:{   //该选项参数放 自定义指令 对象的key值就表示 自定义指令名字  value值就放钩子函数 写在这里面的是局部置令 
+                lqq:{  //属性名就是 自定义指令名字
+                    bind(el,obj){
+
+                    },
+                    update(el,obj){
+
+                    }
+                }
+            },
+            filter:{       //该选项参数放 过滤器 局部过滤器   key值表示过滤器名称 
+                'lp':function(value){
+                    var newValue;
+                    /*   */
+                    return newValue;
+                }
+            }
+
+
+            /*钩子函数（生命周期）*/
+
+        });
+
+
+        var vm2 = new Vue({
+            data:{
+
+            }
+        }).$mount("#app2");
+
+    </script>
+</body>
+</html>
