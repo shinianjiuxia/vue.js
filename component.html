@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="vue.js"></script>
+    <title>component练习</title>
+</head>
+<body>
+    <div id="app">
+       	<pl></pl>
+    </div>
+      
+    <script>
+        //1.使用组件;
+       var item = Vue.extend({
+            template:`
+                <ul>
+                    <li>wo</li>
+                    <li>de</li>
+                    <li>jia</li>
+                    <li @click="btn">xiang</li>
+                    <li>zai</li>
+                    <li>huang</li>
+                    <li>tu</li>
+                    <li>gao</li>
+                    <li>po</li>
+                    <li>shang</li>
+            </ul> 
+
+            `,
+         methods:{
+            btn:function(){
+                alert()
+            }
+         }
+        });
+        //2.变成组件
+     Vue.component('pl','item');
+
+    var vm = new Vue({
+        el:'#app',
+        
+    });
+    </script>
+</body>
+</html>
