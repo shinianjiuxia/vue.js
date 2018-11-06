@@ -28,8 +28,16 @@
 
     <div id="app2">
         <div>事件修饰符 v-model  v-on @ </div>
-        
+        指令V-model：
+                .lazy:把input事件变成change事件
+                .trim:把字符串的首尾空格去掉
+                .number:把纯数字字符串变成数字
+     自定义指令：
+            全局自定义指令：
+            局部自定义指令：
+            Vue.directive("pl" , function(el){
 
+            })
     </div>
 
     <script>
@@ -88,7 +96,16 @@
 
             }
         }).$mount("#app2");
+       
+       
+       计算属性：computed，没有全局只有局部写法
+       watch:监测属性的选项参数
+            深度监测
+            浅度监测：只能监测基本类型
 
+    
+      获取dom元素的方法：
+          this.$refs是一个对象集合，放的全部是标记好元素，在标签写一个ref="标记"
     </script>
 </body>
 </html>
