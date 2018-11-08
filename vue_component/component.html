@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header-top></header-top>
+        <header-center></header-center>
+        <header-footer></header-footer>   
+    </div>
+
+    <template id="footer"><div>
+           {{msg}}
+     </div></template>
+    <script>
+        var headerCenter = {
+            template:`<div>中间的组件{{msg}}</div>`,
+            data(){
+                return{
+                    msg:'dfds'
+                }
+            }
+        };
+
+        var headerFooter = {
+            template:"#footer",
+            data(){
+                return{
+                    msg:'我是最下面的组件'
+                }
+                
+            },
+            props:[]
+        }
+
+        var vm = new Vue({
+            el:'#app',
+            components:{
+                'headerTop':{
+                    template:'<div>我是头组件</div>',
+                    methods:{
+
+                    },
+                    watch:{
+
+                    }
+                },
+                'headerCenter':headerCenter,
+                'headerFooter':headerFooter
+            }
+        });
+    </script>
+
+</body>
+</html>
