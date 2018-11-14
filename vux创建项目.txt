@@ -1,0 +1,370 @@
+
+基于vue的ui组件有很多，可以查看一下具体有哪些：
+	https://github.com/opendigg/awesome-github-vue  查看vue的一些组件库
+
+
+
+	组件分类
+		1. 功能型
+
+		2.  UI型
+
+		3. 混合型
+
+
+
+步骤：
+	1. 安装vue脚手架：
+		npm install vue-cli -g
+
+	        查看是否安装成功 : vue
+
+	2. 生成项目：
+		vue init webpack 163(项目名称)
+
+	
+	3. 进入生产的项目：
+		cd 163(项目名称)
+
+	4. 运行该项目：
+		npm run dev
+
+
+	5. 布局使用一个ui框架： vux
+		1. 安装vux:
+			npm i -S vux          ==>     npm install vue --save
+
+		2. 安装vux-loader(不安装会报错)  
+			npm install vux-loader --save-dev       ==>      npm i vux-loader -D
+
+
+		3. 安装less-loader(用以正确编译less源码，否则会出现报错 ')
+			npm install less less-loader --save-dev           ==>         npm i less less-loader -D
+			style里面写lang="lesss"s
+
+			style里面导入一个vux的一个样式重配：
+			@import '~vux/src/styles/reset.less;
+
+
+		4. 安装yaml-loader(以正确进行语言文件读取)
+			npm install yaml-loader --save-dev         ==>       npm i yaml-loader -D
+
+		5. 在build/webpack.base.conf.js 文件进行配置
+	
+			const vuxLoader = require('vux-loader');
+
+			const webpackConfig = module.exports   //module.exports生产项目就有的配置
+
+
+			
+		        最后，在resolve的: {
+    			     extensions: ['.js', '.vue', '.json','.less']里加入.less。
+
+
+		        module.exports=vuxLoader.merge(webpackConfig,{plugins:['vux-ui']})
+
+		6. 在main.js里配置：
+			import { Datetime, Group } from 'vux'  
+			Vue.component(Datetime.name, Datetime);  
+			Vue.component(Group.name, Group);  
+
+		7. 重新初始化一下依赖：
+			cnpm install --save
+
+
+		8. 可以使用vux框架了
+
+
+
+
+
+
+
+
+					vux组件的使用
+
+
+		vux的布局容器：ViewBox
+			介绍 ：该组件为vux的基本布局容器，建议其他组件包含在该组件内部使用
+
+			导入：
+				import {ViewBox} from 'vux';
+
+			导入后要把ViewBox注入到vue组件里面，才能用：
+				export default {
+  					name: 'App',
+  					components:{
+  						ViewBox
+  					}	  					
+				}
+			
+			使用该组件：
+				<view-box></view-box>  js区分大小写，html不区分大小写
+
+
+			viewBox组件内部可以划分为三个部分，三个部分可以是三个组件：
+				1. 头部
+
+
+				2. 内容部分
+
+
+				3. 底部
+
+
+
+				头部组件：
+					XHeader
+					导入：import {XHeader} from 'vux';
+					把组件注入到vue里面：
+						export default {
+  							name: 'App',
+  							components:{
+  								ViewBox,
+								XHeader
+  							}	  					
+						}
+					使用组件：
+						
+						<view-box>
+    							<x-header></x-header>
+    						</view-box>
+					
+					组件里面有两种写法：
+						1. 属性的写法：
+					<x-header class="header" slot="header"
+    						:left-options="{showBack: false}"  //不显示文字
+    						:right-options="{showMore:false}"
+						:title="标题内容"
+
+					>
+
+
+
+			组件Tab,TabItem
+		介绍：实现tab切换的组件
+		导入：import{Tab,TabItem} from 'vux';
+		注入到vue里面：
+			export default {
+  				name: 'App',
+  				components:{
+  					Tab,
+					TabItem
+  				}	  					
+			}
+		使用：
+			<tab>
+				<tab-item selected></tab-item>   //selected 默认当前选中的项
+			</tab>
+
+		
+		为了让tab切换有一个过度的运动效果，可以使用组件Scroller
+
+
+
+
+			组件：Scroller
+		介绍 ：自定义滚动组件，让运动的组件有回弹效果
+		导入：import{Scroller} from 'vux';
+		注入到vue里面：
+			export default {
+  				name: 'App',
+  				components:{
+  					Scroller
+  				}	  					
+			}
+		使用：
+			<scroller :lock-y="true">
+				<div>
+					<tab></tab>
+				</div>
+			</scroller>
+			ps : 注意使用scroller时，一定要在里面加一个div,必须加
+			ps: scroller在水平和竖直方向都会拖动，所以:lock-y="true"表示在垂直不能拖动
+				:lock-x="true",表示方法在x方向不能拖动
+
+
+
+
+			
+				组件：Swiper
+
+			介绍：轮播图组件/也叫幻灯片组件
+			导入：import{Swiper}from 'vux';
+			注入vue里面：
+			使用：
+				<swiper :list="轮播图的数据，把数据写在data里面"
+					v-model="在data里面写一个数，表示当前轮播图是第几章"
+					:loop="true,无缝轮播">
+
+				</swiper>
+
+
+
+
+
+				组件：Marquee,MarqueeItem
+			介绍：滚动跑马灯组件
+			导入：import{Marquee,MarqueeItem}
+			注入到vue里面
+			使用：
+				<marquee>
+					<marquee-item>1111</marquee-item>
+					<marquee-item>1111</marquee-item>
+					<marquee-item>1111</marquee-item>
+					<marquee-item>1111</marquee-item>
+				</marquee>
+
+
+
+
+
+
+
+				组件：Panel
+			介绍：图文列表组件
+			导入：import{Panel}from 'vux';
+			注入到vue里面：
+			使用：
+				<panel :list="data里面绑定的数据"></panel>
+
+
+
+
+
+			基于vue写的一个jsonp插件：vue-jsonp
+		插件介绍：https://www.npmjs.com/package/vue-jsonp
+		下载 ： npm install vue-jsonp -D
+
+		导入：import VueJsonp from 'vue-jsonp'
+		
+		注入到vue里面：
+			Vue.use(VueJsonp)
+
+		使用：
+			组件里面： this.$jsonp(地址，{传过去的参数，可选}).then(data => {
+
+				console.log(data)
+			})
+			 
+
+
+
+
+
+				组件：Scroller
+	
+		介绍：上拉刷新，下拉加载
+		导入：import{Scroller} from 'vux';
+		注入到vue里面：
+			export default {
+  				name: 'App',
+  				components:{
+  					Scroller
+  				}	  					
+			}
+		
+		例子：
+			<scroller lock-x @on-scroll="onScroll">
+      				<div>
+      					<p style="text-align:center;" v-show="!topLoing">
+			      			<span style="vertical-align:middle;display:inline-block;font-size:14px;">刷新中&nbsp;&nbsp;</span><inline-loading></inline-loading>
+			    		</p>
+         				<panel :list="list"></panel>
+      				</div>
+    			</scroller>
+
+
+
+
+
+			组件：InlineLoading
+		介绍：显示加载的组件
+		导入：import{InlineLoading} from 'vux';
+		注入到vue里面：
+			export default {
+  				name: 'App',
+  				components:{
+  					InlineLoading
+  				}	  					
+			}
+		使用：
+			<inline-loading></inline-loading>
+
+
+
+
+
+
+
+			
+			
+			创建一个详情页的路由和组件，这个详情页由点击每个新闻时跳转到该路由
+				
+				在panel里面添加一个事件监听
+
+				    <panel :list="list" @on-click-item="tapContent"></panel>
+
+				在methods里面写方法：
+					
+					tapContent(item){
+				
+						let objInfo = {
+							title:item.title,
+							src:item.src,
+							desc:item.desc
+						}
+				
+						this.$router.push('/xiangQing')
+					}
+		
+					在@on-click-item="tapContent"不写任何东西
+					tapContent(item) 这个里面的item表示:list='list'里面的每					一项，整理item里面的东西，把它当成参数带到/xiangQing'路						由里面，
+				tapContent(item){
+				
+					let objInfo = {
+						title:item.title,
+						src:item.src,
+						desc:item.desc
+					}
+					// objInfo就是要传到详情页的数据,query:objInfo,参数
+					this.$router.push({path:'/xiangQing',query:objInfo})
+				
+				}
+
+				在详情页的生命周期里面的created,表示实例了路由还没有挂载元素，所					以在，里面通过this.$route.query去获取，点击时传过来的数据，
+				并且把数据给data代理
+
+					created(){
+	  					this.title = this.$route.query.title;
+	  					this.src = this.$route.query.src;
+	  					this.desc = this.$route.query.desc;
+	  				}
+		
+		
+
+
+
+
+			
+
+
+
+
+
+
+
+
+
+
+			
+
+
+		
+
+
+
+
+
+
+
