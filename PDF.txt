@@ -1,0 +1,107 @@
+mui 封装的Ajax
+2017年12月13日 16:44:35 chenzl0723 阅读数：382 标签： ajax mui框架  更多
+个人分类： mui框架 ajax
+版权声明：本文为博主原创文章，未经博主允许不得转载。	https://blog.csdn.net/chenzl0723/article/details/78793621
+mui框架基于htm5plus的XMLHttpRequest，封装了常用的Ajax函数，支持GET、POST请求方式，支持返回json、xml、html、text、script数据类型； 本着极简的设计原则，mui提供了mui.ajax方法，并在mui.ajax方法基础上，进一步简化出最常用的mui.get()、mui.getJSON()、mui.post()三个方法。
+
+mui.ajax( url[, settings]) 
+url Type: String 请求发送的目标地址 
+settings Type: PlainObject key/value格式的json对象，用来配置ajax请求参数，支持的完整参数参考如下mui.ajax([settings])方法 
+mui.ajax([settings]) 
+settings Type: PlainObject key/value格式的json对象，用来配置ajax请求参数，支持的详细参数如下： 
+async Type: Boolean 发送同步请求 
+crossDomain *5+ only Type: Boolean 强制使用5+跨域 
+data Type: PlainObject||String 发送到服务器的业务数据 
+■ dataType Type: String
+
+预期服务器返回的数据类型；如果不指定，mui将自动根据HTTP包的MIME头信息自动判断；支持设置的dataType可选值：
+
+       "xml": 返回XML文档
+       "html": 返回纯文本HTML信息；
+       "script": 返回纯文本JavaScript代码
+        "json": 返回JSON数据
+         "text": 返回纯文本字符串
+1
+2
+3
+4
+5
+error 
+Type: Functon（XMLHttpRequest xhr,String type,String errorThrown） 
+请求失败时触发的回调函数，该函数接收三个参数： 
+● xhr：xhr实例对象 
+● type：错误描述，可取值：”timeout”, “error”, “abort”, “parsererror”、”null” 
+● errorThrown：可捕获的异常对象 
+■ success 
+Type: Functon（Anything data,String textStatus,XMLHttpRequest xhr） 
+请求成功时触发的回调函数，该函数接收三个参数： 
+● data：服务器返回的响应数据，类型可以是json对象、xml对象、字符串等； 
+● textStatus：状态描述，默认值为’success’ 
+● xhr：xhr实例对象 
+■ timeout 
+Type: Number 
+请求超时时间（毫秒），默认值为0，表示永不超时；若超过设置的超时时间(非0的情况)，依然未收到服务器响应，则触发error回调 
+■ type 
+Type: String 
+请求方式，目前仅支持’GET’和’POST’，默认为’GET’方式 
+■ headers 
+Type: Json 
+指定HTTP请求的Header 
+headers:{‘Content-Type’:’application/json’} 
+■ processData 
+Type: Boolean 
+为了匹配默认的content-type（”application/x-www-form-urlencoded”）， 
+mui默认会将data参数中传入的非字符串类型的数据转变为key1=value&key2=value2格式的查询串； 
+如果业务需要，希望发送其它格式的数据（比如Document对象），可以设置processData为false 
+代码示例：如下为通过post方式向某服务器发送鉴权登录的代码片段 
+mui.ajax(‘http://server-name/login.php‘,{ 
+data:{ 
+username:’username’, 
+password:’password’ 
+}, 
+dataType:’json’,//服务器返回json格式数据 
+type:’post’,//HTTP请求类型 
+timeout:10000,//超时时间设置为10秒； 
+headers:{‘Content-Type’:’application/json’}, 
+success:function(data){ 
+//服务器返回响应，根据响应结果，分析是否登录成功； 
+… 
+}, 
+error:function(xhr,type,errorThrown){ 
+//异常处理； 
+console.log(type); 
+} 
+}); 
+mui.post()方法是对mui.ajax()的一个简化方法，直接使用POST请求方式向服务器发送数据、且不处理timeout和异常（若需处理异常及超时，请使用mui.ajax()方法），使用方法： mui.post(url[,data][,success][,dataType])，如上登录鉴权代码换成mui.post()后，代码更为简洁，如下： 
+mui.post(‘http://server-name/login.php‘,{ 
+username:’username’, 
+password:’password’ 
+},function(data){ 
+//服务器返回响应，根据响应结果，分析是否登录成功； 
+… 
+},’json’ 
+); 
+mui.get()方法和mui.post()方法类似，只不过是直接使用GET请求方式向服务器发送数据、且不处理timeout和异常（若需处理异常及超时，请使用mui.ajax()方法），使用方法： mui.get(url[,data][,success][,dataType])，如下为获得某服务器新闻列表的代码片段，服务器以json格式返回数据列表 
+mui.get(‘http://server-name/list.php‘,{category:’news’},function(data){ 
+//获得服务器响应 
+… 
+},’json’ 
+); 
+如上mui.get()方法和如下mui.ajax()方法效果是一致的： 
+mui.ajax(‘http://server-name/list.php‘,{ 
+data:{ 
+category:’news’ 
+}, 
+dataType:’json’,//服务器返回json格式数据 
+type:’get’,//HTTP请求类型 
+success:function(data){ 
+//获得服务器响应 
+… 
+} 
+}); 
+mui.getJSON()方法是在mui.get()方法基础上的更进一步简化，限定返回json格式的数据，其它参数和mui.get()方法一致，使用方法： mui.get(url[,data][,success])，如上获得新闻列表的代码换成mui.getJSON()方法后，更为简洁，如下： 
+mui.getJSON(‘http://server-name/list.php‘,{category:’news’},function(data){ 
+//获得服务器响应 
+… 
+} 
+); 
