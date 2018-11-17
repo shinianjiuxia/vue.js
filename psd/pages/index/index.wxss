@@ -1,0 +1,5 @@
+/**index.wxss**/
+.text{
+  margin-top:75.2rpx;
+}
+

@@ -1,0 +1,18 @@
+<!--pages/secondHeade/secondHeade.wxml-->
+<text>pages/secondHeade/secondHeade.wxml</text>
+
+<view>
+  <view class="tabBar">
+      <navigator url="/pages/index/index">首页</navigator>
+      <navigator url="/pages/info/info">免费领</navigator>
+      <navigator url="/pages/free/free">卖二手</navigator>
+      <navigator url= "/pages/secondHeade/secondHeade">消息</navigator>
+      <navigator url="/pages/my/my">我的</navigator>
+  </view>
+</view>
+
+
+<view class="nav">
+  <navigator url= "/pages/secondHeade/secondHeade">消息</navigator>
+  <navigator url="/pages/my/my">我的</navigator>
+</view>

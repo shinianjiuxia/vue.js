@@ -1,0 +1,36 @@
+/**app.wxss**/
+.tabBar{
+  width:750rpx;
+  height:75.2rpx;
+  background-color: red;
+  position:fixed;
+  left:0;
+  bottom:0;
+  color:#000;
+  font-size:12px;
+}
+
+.tabBar navigator{
+  float:left;
+  width:149.6rpx;
+  height:75.2rpx;
+  text-align: center;
+}
+
+.nav{
+   width:750rpx;
+  height:75.2rpx;
+  background-color: red;
+  position:fixed;
+  left:0;
+  top:0;
+  color:#000;
+  font-size:12px;
+}
+
+.nav navigator{
+  float:left;
+  width:374.1rpx;
+  height:75.2rpx;
+  text-align: center;
+}
