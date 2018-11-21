@@ -1,0 +1,19 @@
+文本：
+white-space：nowrap;禁止换行
+overflow:hidden;超出部分隐藏
+text-overflow:ellipsis;文本超出部分省略号代替；
+
+移动端单位：
+vw：宽度单位 例：50vw浏览器宽度50%；
+vh: 高度单位 例：50vh浏览器高度50%；
+
+九宫格布局：
+display:grid;
+列：grid-template-columns:1fr 1fr 1fr;(fr份的意思，这里表示等大小的3列)；
+行：grid-template-rows:1fr 1fr 1fr;(fr份的意思，这里表示等大小的3行)；
+
+盒模型布局：
+display：flex；
+flex-wrap：wrap；换行显示
+justify-content:space-between;行居中显示；
+align-items:center;列居中显示；
