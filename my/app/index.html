@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>app</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  <script>
+    //3.计算缩放比例
+       var scale = window.devicePixelRatio?1/window.devicePixelRatio:1;
+    //4.获取一下head标签把创建的meta标签插入head标签
+       var head = document.getElementsByTagName('head')[0];
+    //6.获取一下顶级的html标签
+       var html = document.getElementsByTagName('html')[0];
+    //1.创建一个meta标签
+        var meta = document.createElement('meta');
+    //2.给meta设置视口和内容；
+        meta.name = "viewport";
+        meta.content = 'width=device-width,user-scalable=no,initial-scale='+ scale+',minimum-scale='+ scale;
+    //5.把创建的meta标签插入head里面
+        head.appendChild(meta);
+    //7.获取设备宽度
+        var iW = window.innerWidth;
+    //8.设置字体大小rem
+        html.style.fontSize=iW/30 + 'px';
+    //9.尺寸发生更改 重新计算
+       // window.onresize = function(){
+        // html.style.fontSize=iW/30 + 'px';
+        //}
+</script>
+</html>
